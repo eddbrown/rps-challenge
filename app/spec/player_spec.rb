@@ -3,23 +3,17 @@ require 'player'
 describe Player do
 
 	let(:player) { Player.new }
-	let(:rps)    { double :rps}
 
-	it 'should have an rps object' do
-		player.add(rps)
-		expect(player.has_rps_object?).to eq(true)
+
+	it 'should have a choise' do
+		player.choose(:paper)
+		expect(player.choice).to eq(:paper)
 	end
 
-	it 'should be able to choose paper' do
-		expect(rps).to receive(:change_to_paper)
-		player.add(rps)
-		player.choose_paper
+	it 'should raise an error if anything but rps is passed' do
+		expect{player.choose(:not_rps)}.to raise_error 'not rp or s'
 	end
 
-	it 'should be able to choose scissors' do
-		expect(rps).to receive(:change_to_scissors)
-		player.add(rps)
-		player.choose_scissors
-	end
+
 
 end

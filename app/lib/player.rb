@@ -1,25 +1,16 @@
 class Player
 
-	attr_accessor :rps_holder
+	attr_accessor :choice, :choices
 
-	def add(rps)
-		@rps_holder = rps
+	def initialize
+		@choices = [:rock, :paper, :scissor]
+		@choice = @choices.sample
 	end
 
-	def has_rps_object?
-		!@rps_holder.nil?
+	def choose(weapon)
+		raise 'not rp or s' if !choices.include?(weapon)
+		@choice = weapon
 	end
 
-	def choose_paper
-		@rps_holder.change_to_paper
-	end
-
-	def choose_scissors
-		@rps_holder.change_to_scissors
-	end
-
-	def choose_rock
-		@rps_holder.change_to_rock
-	end
 
 end

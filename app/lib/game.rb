@@ -4,36 +4,20 @@ class Game
 
 	def initialize
 		@players = []
-		# @turn = false
+		@player1wins = [[:scissors, :paper], [:rock, :scissors], [:paper, :rock]]
 	end
 
 	def add(player)
-		raise 'game already has 2 players!' if player_count == 2
-		@players << player
+		player_count == 2 ? raise('too many players!') : @players << player
 	end
 
 	def player_count
 		@players.length
 	end
 
-	def winner
-
-		if @players.first.rps_holder.content == 'scissors'
-			return 'player 2 wins!' if @players.last.rps_holder.content == 'rock'
-			return 'player 1 wins!' if @players.last.rps_holder.content == 'paper'
-			return 'draw!' if @players.last.rps_holder.content == 'scissors'
-		elsif @players.first.rps_holder.content == 'rock'
-			return 'player 2 wins!' if @players.last.rps_holder.content == 'paper'
-			return 'player 1 wins!' if @players.last.rps_holder.content == 'scissors'
-			return 'draw!' if @players.last.rps_holder.content == 'rock'
-		elsif @players.first.rps_holder.content == 'paper'
-			return 'player 2 wins!' if @players.last.rps_holder.content == 'scissors'
-			return 'player 1 wins!' if @players.last.rps_holder.content == 'rock'
-			return 'draw!' if @players.last.rps_holder.content == 'paper'
-		else
-			return 'something has gone wrong'
-		end
-
+	def result
+		return :player_1_wins if @player1wins.include?([@players[0].choice, @players[1].choice])
+		@players[0].choice == @players[1].choice ? :draw : :player_2_wins
 	end
 
 end 
